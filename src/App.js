@@ -30,7 +30,7 @@ function App () {
   //   console.log(points, newPoints)
   //   changePoints(newPoints)
   // }
-  console.log(state.points)
+  const centroid = getCentroid(state.points)
   return (
     <Map
       // eslint-disable-next-line
@@ -39,13 +39,13 @@ function App () {
         height: '100vh',
         width: '100vw'
       }}
-      center={[2.1700471,41.3870154]}
+      center={state.points.length===0?[2.1700471,41.3870154]:(state.points.length===1?state.points[0]: centroid)}
       bearing={[-44.4105]}
       onClick={(e,p)=>{dispatch({type:'addPoint', payload:{newPoint:[p.lngLat['lng'],p.lngLat['lat']]}})}}
-      zoom={[14]}
+      
     >
       {state.points.length>1?<Layer type="symbol" id="centroid" layout={{ 'icon-image': 'bar-15' }}>
-          <Feature coordinates={getCentroid(state.points)} />
+          <Feature coordinates={centroid} />
         </Layer> :null}
       {state.points.map((p,i)=>{
         return <Layer onClick={()=>console.log(i+1)} type="symbol" id={`marker-${Math.random()}`} layout={{ 'icon-image': 'castle-15' }}>
