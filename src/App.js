@@ -33,8 +33,8 @@ function App () {
   console.log(state.points)
   return (
     <Map
-      animationOptions={{duration:0}}
-      style="mapbox://styles/bernatesquirol/ckhx714630k5r19ml62nlo90w"
+      // eslint-disable-next-line
+      style={"mapbox://styles/bernatesquirol/ckhx714630k5r19ml62nlo90w"}
       containerStyle={{
         height: '100vh',
         width: '100vw'
